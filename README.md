@@ -1,3 +1,5 @@
+# GhostChat
+
 Secure Chat - Decentralized, Encrypted Peer-to-Peer Messaging
 Secure Chat is a cross-platform, peer-to-peer messaging app with end-to-end encryption that prioritizes privacy. Users create private channels by sharing an offline key, ensuring conversations remain private and inaccessible to unauthorized parties. Built with cross-platform tools, Secure Chat is accessible on both Android and iOS.
 Features
