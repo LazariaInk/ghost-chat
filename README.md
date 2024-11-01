@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 # ghostchat
 
 A new Flutter project.
@@ -83,4 +82,4 @@ License
 This project is open-source and available under the [MIT License](LICENSE).
 Acknowledgments
 Thanks to the contributors and the open-source community for making Secure Chat possible!
->>>>>>> 16be87f0f6068bade09527cf031da12907280ab6
+
