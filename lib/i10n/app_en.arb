@@ -4,5 +4,24 @@
   "notifications": "Notifications",
   "darkTheme": "Dark Theme",
   "termsAndConditions": "Terms and Conditions",
-  "selectLanguage": "Select Language"
+  "selectLanguage": "Select Language",
+
+  "signIn" : "Sign in",
+
+  "channels" : "Channels",
+
+  "writeAMessage" : "Write a message...",
+
+  "confirmDeletion" : "Confirm deletion",
+  "confirmDeletionMessage" : "To delete the channel, write \"DELETE\" in the field below:",
+  "confirmDeletionToolkit" :  "write \"DELETE\"",
+  "cancel" : "cancel",
+  "delete" : "Delete",
+  "searchChannel" : "Search a channel...",
+
+  "addChannel" : "Add channel",
+  "channelName" : "Channel's name",
+  "secretKey" : "Secret key",
+  "encryptionAlgorithm" : "Encryption algorithm"
+
 }

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart'; // Import pentru AppLocalizations
 
 class ChatScreen extends StatelessWidget {
   final String channelName;
@@ -9,15 +10,19 @@ class ChatScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Chat: $channelName'),
+        title: Text(AppLocalizations.of(context)!.channelName),
       ),
       body: Column(
         children: [
           Expanded(
             child: ListView(
               children: const [
-                ListTile(title: Text("User1: Salutare!")),
-                ListTile(title: Text("User2: Bună!")),
+                ListTile(
+                  title: Text("User1: haha"),
+                ),
+                ListTile(
+                  title: Text("User2: hello"),
+                ),
               ],
             ),
           ),
@@ -25,11 +30,11 @@ class ChatScreen extends StatelessWidget {
             padding: const EdgeInsets.all(8.0),
             child: Row(
               children: [
-                const Expanded(
+                Expanded(
                   child: TextField(
                     decoration: InputDecoration(
-                      labelText: 'Scrie un mesaj...',
-                      border: OutlineInputBorder(),
+                      labelText: AppLocalizations.of(context)!.writeAMessage, // Folosim cheia pentru "writeAMessage"
+                      border: const OutlineInputBorder(),
                     ),
                   ),
                 ),

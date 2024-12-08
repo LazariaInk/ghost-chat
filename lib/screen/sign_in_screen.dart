@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart'; // Import pentru AppLocalizations
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 
@@ -10,7 +11,9 @@ class SignInScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text('Sign In')),
+      appBar: AppBar(
+        title: Text(AppLocalizations.of(context)!.signIn), // Folosim cheia signIn din arb
+      ),
       body: Center(
         child: ElevatedButton(
           onPressed: () async {
@@ -24,7 +27,7 @@ class SignInScreen extends StatelessWidget {
               );
             }
           },
-          child: const Text('Sign in with Google'),
+          child: Text(AppLocalizations.of(context)!.signIn), // Folosim cheia signInWithGoogle
         ),
       ),
     );

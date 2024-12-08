@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-import '../main.dart'; // Import MyApp pentru a folosi setLocale
+import 'package:shared_preferences/shared_preferences.dart';
+import '../main.dart'; // Import MyApp for MyAppState
 
 class SettingsScreen extends StatefulWidget {
   const SettingsScreen({super.key});
@@ -11,6 +12,43 @@ class SettingsScreen extends StatefulWidget {
 
 class _SettingsScreenState extends State<SettingsScreen> {
   String _selectedLanguage = 'en';
+  bool _isDarkMode = false;
+
+  @override
+  void initState() {
+    super.initState();
+    _loadPreferences();
+  }
+
+  Future<void> _loadPreferences() async {
+    final prefs = await SharedPreferences.getInstance();
+    setState(() {
+      _isDarkMode = prefs.getBool('isDarkMode') ?? false;
+      _selectedLanguage = prefs.getString('selectedLanguage') ?? 'en';
+    });
+  }
+
+  void _toggleDarkMode(bool value) async {
+    final prefs = await SharedPreferences.getInstance();
+    await prefs.setBool('isDarkMode', value);
+    setState(() {
+      _isDarkMode = value;
+    });
+
+    final MyAppState? state = context.findAncestorStateOfType<MyAppState>();
+    state?.toggleThemeMode(value);
+  }
+
+  void _changeLanguage(String newLanguage) async {
+    final prefs = await SharedPreferences.getInstance();
+    await prefs.setString('selectedLanguage', newLanguage);
+    setState(() {
+      _selectedLanguage = newLanguage;
+    });
+
+    final MyAppState? state = context.findAncestorStateOfType<MyAppState>();
+    state?.setLocale(Locale(newLanguage));
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -26,7 +64,10 @@ class _SettingsScreenState extends State<SettingsScreen> {
           ),
           ListTile(
             title: Text(AppLocalizations.of(context)!.darkTheme),
-            trailing: Switch(value: false, onChanged: (val) {}),
+            trailing: Switch(
+              value: _isDarkMode,
+              onChanged: _toggleDarkMode,
+            ),
           ),
           ListTile(
             title: Text(AppLocalizations.of(context)!.termsAndConditions),
@@ -43,11 +84,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
               ],
               onChanged: (String? newLanguage) {
                 if (newLanguage != null) {
-                  setState(() {
-                    _selectedLanguage = newLanguage;
-                    Locale newLocale = Locale(newLanguage);
-                    MyApp.setLocale(context, newLocale);
-                  });
+                  _changeLanguage(newLanguage);
                 }
               },
             ),

@@ -1,5 +1,6 @@
 import 'dart:math';
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import '../model/channel.dart';
 
 class AddChannelScreen extends StatefulWidget {
@@ -22,15 +23,14 @@ class _AddChannelScreenState extends State<AddChannelScreen> {
     const chars =
         'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789!@#\$%^&*()';
     Random random = Random.secure();
-    return List.generate(length, (index) => chars[random.nextInt(chars.length)])
-        .join();
+    return List.generate(length, (index) => chars[random.nextInt(chars.length)]).join();
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Adaugă Canal'),
+        title: Text(AppLocalizations.of(context)!.addChannel),
       ),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
@@ -39,7 +39,9 @@ class _AddChannelScreenState extends State<AddChannelScreen> {
           children: [
             TextField(
               controller: _nameController,
-              decoration: const InputDecoration(labelText: 'Numele canalului'),
+              decoration: InputDecoration(
+                labelText: AppLocalizations.of(context)!.channelName,
+              ),
             ),
             const SizedBox(height: 20),
             Row(
@@ -48,13 +50,13 @@ class _AddChannelScreenState extends State<AddChannelScreen> {
                   child: TextField(
                     controller: _secretKeyController,
                     obscureText: !_isKeyVisible,
-                    decoration:
-                    const InputDecoration(labelText: 'Cheie secretă'),
+                    decoration: InputDecoration(
+                      labelText: AppLocalizations.of(context)!.secretKey,
+                    ),
                   ),
                 ),
                 IconButton(
-                  icon: Icon(
-                      _isKeyVisible ? Icons.visibility : Icons.visibility_off),
+                  icon: Icon(_isKeyVisible ? Icons.visibility : Icons.visibility_off),
                   onPressed: () {
                     setState(() {
                       _isKeyVisible = !_isKeyVisible;
@@ -64,8 +66,7 @@ class _AddChannelScreenState extends State<AddChannelScreen> {
                 IconButton(
                   icon: const Icon(Icons.refresh),
                   onPressed: () {
-                    final randomKey =
-                    _generateRandomKey(16); // Lungime de 16 caractere
+                    final randomKey = _generateRandomKey(16);
                     setState(() {
                       _secretKeyController.text = randomKey;
                     });
@@ -87,8 +88,9 @@ class _AddChannelScreenState extends State<AddChannelScreen> {
                   _selectedAlgorithm = newValue!;
                 });
               },
-              decoration:
-              const InputDecoration(labelText: 'Algoritmul de criptare'),
+              decoration: InputDecoration(
+                labelText: AppLocalizations.of(context)!.encryptionAlgorithm,
+              ),
             ),
             const SizedBox(height: 20),
             ElevatedButton(
@@ -102,7 +104,7 @@ class _AddChannelScreenState extends State<AddChannelScreen> {
                   Navigator.pop(context, newChannel);
                 }
               },
-              child: const Text('Adaugă Canal'),
+              child: Text(AppLocalizations.of(context)!.addChannel),
             ),
           ],
         ),

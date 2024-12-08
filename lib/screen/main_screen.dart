@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:ghostchat/screen/channel_list_screen.dart';
 import 'package:ghostchat/screen/settings_screen.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -28,7 +29,7 @@ class _MainScreenState extends State<MainScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Colors.cyan,
+        backgroundColor: Theme.of(context).appBarTheme.backgroundColor,
         title: Row(
           children: [
             Image.asset(
@@ -36,7 +37,7 @@ class _MainScreenState extends State<MainScreen> {
               height: 40,
             ),
             const SizedBox(width: 10),
-            const Text('Ghost-chat'),
+            Text(AppLocalizations.of(context)!.appTitle),
           ],
         ),
         actions: [
@@ -50,14 +51,14 @@ class _MainScreenState extends State<MainScreen> {
       ),
       body: _screens[_selectedIndex],
       bottomNavigationBar: BottomNavigationBar(
-        items: const <BottomNavigationBarItem>[
+        items: [
           BottomNavigationBarItem(
             icon: Icon(Icons.chat),
-            label: 'Channels',
+            label: AppLocalizations.of(context)!.channels,
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.settings),
-            label: 'Settings',
+            label: AppLocalizations.of(context)!.settings,
           ),
         ],
         currentIndex: _selectedIndex,

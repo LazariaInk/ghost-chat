@@ -1,6 +1,6 @@
 import 'dart:convert';
-
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart'; // Import pentru AppLocalizations
 import 'package:shared_preferences/shared_preferences.dart';
 import 'add_channel_screen.dart';
 import 'chat_screen.dart';
@@ -67,25 +67,23 @@ class _ChannelListScreenState extends State<ChannelListScreen> {
   }
 
   Future<void> _showDeleteConfirmationDialog(Channel channel) async {
-    final TextEditingController confirmationController =
-    TextEditingController();
+    final TextEditingController confirmationController = TextEditingController();
 
     final result = await showDialog<bool>(
       context: context,
       builder: (context) {
         return AlertDialog(
-          title: const Text('Confirmare ștergere'),
+          title: Text(AppLocalizations.of(context)!.confirmDeletion),
           content: Column(
             mainAxisSize: MainAxisSize.min,
             children: [
-              const Text(
-                  'Pentru a șterge canalul, scrieți „DELETE” în câmpul de mai jos:'),
+              Text(AppLocalizations.of(context)!.confirmDeletionMessage),
               const SizedBox(height: 10),
               TextField(
                 controller: confirmationController,
-                decoration: const InputDecoration(
-                  labelText: 'Scrieți DELETE',
-                  border: OutlineInputBorder(),
+                decoration: InputDecoration(
+                  labelText: AppLocalizations.of(context)!.confirmDeletionToolkit,
+                  border: const OutlineInputBorder(),
                 ),
               ),
             ],
@@ -95,7 +93,7 @@ class _ChannelListScreenState extends State<ChannelListScreen> {
               onPressed: () {
                 Navigator.of(context).pop(false); // Cancel
               },
-              child: const Text('Anulează'),
+              child: Text(AppLocalizations.of(context)!.cancel),
             ),
             ElevatedButton(
               onPressed: () {
@@ -103,7 +101,7 @@ class _ChannelListScreenState extends State<ChannelListScreen> {
                   Navigator.of(context).pop(true); // Confirm delete
                 }
               },
-              child: const Text('Șterge'),
+              child: Text(AppLocalizations.of(context)!.delete),
             ),
           ],
         );
@@ -128,7 +126,7 @@ class _ChannelListScreenState extends State<ChannelListScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Canale'),
+        title: Text(AppLocalizations.of(context)!.channels),
       ),
       body: Column(
         children: [
@@ -136,10 +134,10 @@ class _ChannelListScreenState extends State<ChannelListScreen> {
             padding: const EdgeInsets.all(8.0),
             child: TextField(
               controller: _searchController,
-              decoration: const InputDecoration(
-                labelText: 'Caută un canal...',
-                border: OutlineInputBorder(),
-                prefixIcon: Icon(Icons.search),
+              decoration: InputDecoration(
+                labelText: AppLocalizations.of(context)!.searchChannel,
+                border: const OutlineInputBorder(),
+                prefixIcon: const Icon(Icons.search),
               ),
             ),
           ),
@@ -160,8 +158,7 @@ class _ChannelListScreenState extends State<ChannelListScreen> {
                     Navigator.push(
                       context,
                       MaterialPageRoute(
-                        builder: (context) =>
-                            ChatScreen(channelName: channel.name),
+                        builder: (context) => ChatScreen(channelName: channel.name),
                       ),
                     );
                   },

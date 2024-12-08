@@ -1,3 +1,4 @@
+// app_themes.dart
 import 'package:flutter/material.dart';
 
 class AppThemes {
@@ -19,7 +20,6 @@ class AppThemes {
     ),
   );
 
-  // Culori personalizate pentru dark mode
   static final ThemeData darkTheme = ThemeData(
     brightness: Brightness.dark,
     primaryColor: primaryColorDark,

@@ -4,5 +4,23 @@
   "notifications": "Оповещение",
   "darkTheme": "Темная тема",
   "termsAndConditions": "Условия и положения",
-  "selectLanguage": "Выберите язык"
+  "selectLanguage": "Выберите язык",
+
+  "SignIn" : "Bойти",
+
+  "Channels" : "Каналы",
+
+  "writeAMessage" : "Напишите сообщение...",
+
+  "confirmDeletion" : "Подтвердить удаление",
+  "confirmDeletionMessage" : "Чтобы, удалить канал, напишите \"УДАЛИТЬ\" в поле ниже:",
+  "confirmDeletionToolkit" :  "напишите \"УДАЛИТЬ\"",
+  "cancel" : "отмена",
+  "delete" : "Удалить",
+  "searchChannel" : "Поиск канала...",
+
+  "addChannel" : "Добавить канал",
+  "channelName" : "Имя канала",
+  "secretKey" : "Секретный ключ",
+  "encryptionAlgorithm" : "Алгоритм шифрования"
 }
