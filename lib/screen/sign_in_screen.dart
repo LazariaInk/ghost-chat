@@ -12,7 +12,7 @@ class SignInScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(AppLocalizations.of(context)!.signIn), // Folosim cheia signIn din arb
+        title: Text(AppLocalizations.of(context)!.signIn),
       ),
       body: Center(
         child: ElevatedButton(
@@ -27,7 +27,7 @@ class SignInScreen extends StatelessWidget {
               );
             }
           },
-          child: Text(AppLocalizations.of(context)!.signIn), // Folosim cheia signInWithGoogle
+          child: Text(AppLocalizations.of(context)!.signIn),
         ),
       ),
     );

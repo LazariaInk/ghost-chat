@@ -6,9 +6,9 @@
   "termsAndConditions": "Условия и положения",
   "selectLanguage": "Выберите язык",
 
-  "SignIn" : "Bойти",
+  "signIn" : "Bойти",
 
-  "Channels" : "Каналы",
+  "channels" : "Каналы",
 
   "writeAMessage" : "Напишите сообщение...",
 

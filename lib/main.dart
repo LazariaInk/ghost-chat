@@ -9,7 +9,6 @@ import 'package:ghostchat/screen/sign_in_screen.dart';
 import 'package:ghostchat/theme.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp(
@@ -21,11 +20,16 @@ Future<void> main() async {
       storageBucket: 'ghost-chat-ca6f7.firebaseapp.com',
     ),
   );
-  runApp(const MyApp());
+
+  final prefs = await SharedPreferences.getInstance();
+  final String? savedLanguageCode = prefs.getString('selectedLanguage') ?? 'ro';
+  runApp(MyApp(initialLocale: Locale(savedLanguageCode!)));
 }
 
 class MyApp extends StatefulWidget {
-  const MyApp({super.key});
+  final Locale initialLocale;
+
+  const MyApp({super.key, required this.initialLocale});
 
   static void setLocale(BuildContext context, Locale newLocale) {
     final MyAppState? state = context.findAncestorStateOfType<MyAppState>();
@@ -43,12 +47,15 @@ class MyAppState extends State<MyApp> {
   @override
   void initState() {
     super.initState();
+    _locale = widget.initialLocale; // 🔥 Limbă inițială
     _loadThemeMode();
   }
 
-  void setLocale(Locale locale) {
+  void setLocale(Locale locale) async {
+    final prefs = await SharedPreferences.getInstance();
+    await prefs.setString('selectedLanguage', locale.languageCode); // 🔥 Salvează limba selectată
     setState(() {
-      _locale = locale;
+      _locale = locale; // 🔥 Actualizează limba aplicației
     });
   }
 
@@ -75,7 +82,7 @@ class MyAppState extends State<MyApp> {
       theme: AppThemes.lightTheme,
       darkTheme: AppThemes.darkTheme,
       themeMode: _themeMode,
-      locale: _locale,
+      locale: _locale, // 🔥 Folosește limba preluată
       localizationsDelegates: const [
         AppLocalizations.delegate,
         GlobalMaterialLocalizations.delegate,
