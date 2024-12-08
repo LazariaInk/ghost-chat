@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "970751112043",
+    "project_id": "ghost-chat-ca6f7",
+    "storage_bucket": "ghost-chat-ca6f7.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:970751112043:android:df8b0f6fd1d7887ed0522e",
+        "android_client_info": {
+          "package_name": "com.pluriverse.ghostchat"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "970751112043-da8ov3664h0e5gq6d9fvl7vlkmpidqbo.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.pluriverse.ghostchat",
+            "certificate_hash": "46f9fecb011bbafb00c8e419b346c62b268fde2b"
+          }
+        },
+        {
+          "client_id": "970751112043-p7mt3gthjif73pg52u4pksnnemdem626.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBorOa_Uv13CKsEUx3wY2VbaX57mq-IXBo"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "970751112043-p7mt3gthjif73pg52u4pksnnemdem626.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
