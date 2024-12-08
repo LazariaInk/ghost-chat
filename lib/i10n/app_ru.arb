@@ -14,7 +14,7 @@
 
   "confirmDeletion" : "Подтвердить удаление",
   "confirmDeletionMessage" : "Чтобы, удалить канал, напишите \"УДАЛИТЬ\" в поле ниже:",
-  "confirmDeletionToolkit" :  "напишите \"УДАЛИТЬ\"",
+  "confirmDeletionToolkit" :  "напишите \"DELETE\"",
   "cancel" : "отмена",
   "delete" : "Удалить",
   "searchChannel" : "Поиск канала...",
