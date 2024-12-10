@@ -9,7 +9,7 @@
 The app is built using **Flutter** for the client-side interface and **Firebase** for user authentication and message storage. Messages are encrypted before being stored in Firestore, ensuring that only users with the correct secret key can decrypt and read them. The secret keys are **never shared with the server** and are stored locally using **SharedPreferences**.
 
 This PoC is fully deployed as an APK for **Android devices**.
-To download Android version check this link:
+**To download Android version check this link:**
 https://github.com/LazariaInk/ghost-chat/releases/download/V1/app-release.apk
 
 ---
