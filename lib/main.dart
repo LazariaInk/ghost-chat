@@ -82,7 +82,7 @@ class MyAppState extends State<MyApp> {
       theme: AppThemes.lightTheme,
       darkTheme: AppThemes.darkTheme,
       themeMode: _themeMode,
-      locale: _locale, // 🔥 Folosește limba preluată
+      locale: _locale,
       localizationsDelegates: const [
         AppLocalizations.delegate,
         GlobalMaterialLocalizations.delegate,
