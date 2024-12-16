@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import '../main.dart'; // Import MyApp for MyAppState
+import '../main.dart';
 
 class SettingsScreen extends StatefulWidget {
   const SettingsScreen({super.key});

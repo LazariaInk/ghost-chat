@@ -27,7 +27,8 @@ class _ChatScreenState extends State<ChatScreen> {
     final prefs = await SharedPreferences.getInstance();
     final key = prefs.getString('${widget.channelName}_key');
     if (key == null || key.isEmpty) {
-      print('❌ Cheia de criptare nu a fost găsită pentru canalul: ${widget.channelName}');
+      print(
+          '❌ Cheia de criptare nu a fost găsită pentru canalul: ${widget.channelName}');
     } else {
       print('🔑 Cheia de criptare a fost încărcată: $key');
     }
@@ -36,14 +37,17 @@ class _ChatScreenState extends State<ChatScreen> {
     });
   }
 
-
   void _sendMessage() async {
     if (_messageController.text.isNotEmpty && _encryptionKey != null) {
       String plainMessage = _messageController.text;
-      String encryptedMessage = CryptoUtils.encryptMessage(plainMessage, _encryptionKey!);
+      String encryptedMessage =
+          CryptoUtils.encryptMessage(plainMessage, _encryptionKey!);
 
       final userId = FirebaseAuth.instance.currentUser?.uid;
-      final userDoc = await FirebaseFirestore.instance.collection('users').doc(userId).get();
+      final userDoc = await FirebaseFirestore.instance
+          .collection('users')
+          .doc(userId)
+          .get();
 
       if (!userDoc.exists) {
         print('❌ Documentul utilizatorului nu există pentru UID: $userId');
@@ -69,8 +73,6 @@ class _ChatScreenState extends State<ChatScreen> {
     }
   }
 
-
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -94,20 +96,20 @@ class _ChatScreenState extends State<ChatScreen> {
                   String decryptedMessage = '*** Decrypt Error ***';
                   try {
                     if (_encryptionKey != null && _encryptionKey!.isNotEmpty) {
-                      decryptedMessage = CryptoUtils.decryptMessage(encryptedMessage, _encryptionKey!);
+                      decryptedMessage = CryptoUtils.decryptMessage(
+                          encryptedMessage, _encryptionKey!);
                     } else {
                       print('❌ Cheia de criptare este null sau goală!');
                     }
                   } catch (e) {
-                    print('❌ Eroare la decriptare pentru mesajul: $encryptedMessage');
+                    print(
+                        '❌ Eroare la decriptare pentru mesajul: $encryptedMessage');
                   }
                   return ListTile(
                     title: Text(decryptedMessage),
-                    subtitle: Text(doc['senderName']), // Afișează numele utilizatorului
+                    subtitle: Text(doc['senderName']),
                   );
                 }).toList();
-
-
 
                 return ListView(
                   children: messages,

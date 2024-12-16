@@ -5,9 +5,9 @@ class Channel {
   Channel({required this.name, required this.secretKey});
 
   Map<String, dynamic> toJson() => {
-    'name': name,
-    'secretKey': secretKey,
-  };
+        'name': name,
+        'secretKey': secretKey,
+      };
 
   factory Channel.fromJson(Map<String, dynamic> json) {
     return Channel(

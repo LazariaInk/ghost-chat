@@ -1,4 +1,3 @@
-// main.dart
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -47,15 +46,15 @@ class MyAppState extends State<MyApp> {
   @override
   void initState() {
     super.initState();
-    _locale = widget.initialLocale; // 🔥 Limbă inițială
+    _locale = widget.initialLocale;
     _loadThemeMode();
   }
 
   void setLocale(Locale locale) async {
     final prefs = await SharedPreferences.getInstance();
-    await prefs.setString('selectedLanguage', locale.languageCode); // 🔥 Salvează limba selectată
+    await prefs.setString('selectedLanguage', locale.languageCode);
     setState(() {
-      _locale = locale; // 🔥 Actualizează limba aplicației
+      _locale = locale;
     });
   }
 

@@ -1,6 +1,6 @@
 import 'dart:convert';
 import 'package:flutter/material.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart'; // Import pentru AppLocalizations
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'add_channel_screen.dart';
 import 'chat_screen.dart';
@@ -67,7 +67,8 @@ class _ChannelListScreenState extends State<ChannelListScreen> {
   }
 
   Future<void> _showDeleteConfirmationDialog(Channel channel) async {
-    final TextEditingController confirmationController = TextEditingController();
+    final TextEditingController confirmationController =
+        TextEditingController();
 
     final result = await showDialog<bool>(
       context: context,
@@ -82,7 +83,8 @@ class _ChannelListScreenState extends State<ChannelListScreen> {
               TextField(
                 controller: confirmationController,
                 decoration: InputDecoration(
-                  labelText: AppLocalizations.of(context)!.confirmDeletionToolkit,
+                  labelText:
+                      AppLocalizations.of(context)!.confirmDeletionToolkit,
                   border: const OutlineInputBorder(),
                 ),
               ),
@@ -158,7 +160,8 @@ class _ChannelListScreenState extends State<ChannelListScreen> {
                     Navigator.push(
                       context,
                       MaterialPageRoute(
-                        builder: (context) => ChatScreen(channelName: channel.name),
+                        builder: (context) =>
+                            ChatScreen(channelName: channel.name),
                       ),
                     );
                   },

@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart'; // Import pentru AppLocalizations
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:google_sign_in/google_sign_in.dart';
-import 'package:cloud_firestore/cloud_firestore.dart'; // 🔥 Import pentru Firestore
+import 'package:cloud_firestore/cloud_firestore.dart';
 
 import 'main_screen.dart';
 
@@ -34,26 +34,27 @@ class SignInScreen extends StatelessWidget {
     );
   }
 
-  /// 🔥 Funcția de autentificare Google
   Future<User?> signInWithGoogle() async {
     try {
       final GoogleSignIn googleSignIn = GoogleSignIn();
       final GoogleSignInAccount? googleUser = await googleSignIn.signIn();
 
       if (googleUser != null) {
-        final GoogleSignInAuthentication googleAuth = await googleUser.authentication;
+        final GoogleSignInAuthentication googleAuth =
+            await googleUser.authentication;
 
         final AuthCredential credential = GoogleAuthProvider.credential(
           accessToken: googleAuth.accessToken,
           idToken: googleAuth.idToken,
         );
 
-        final UserCredential userCredential = await FirebaseAuth.instance.signInWithCredential(credential);
+        final UserCredential userCredential =
+            await FirebaseAuth.instance.signInWithCredential(credential);
         final User? user = userCredential.user;
 
         if (user != null) {
           print('✅ Autentificare reușită pentru UID: ${user.uid}');
-          await saveUserToFirestore(user); // Salvăm utilizatorul în Firestore
+          await saveUserToFirestore(user);
         }
 
         return user;
@@ -64,17 +65,15 @@ class SignInScreen extends StatelessWidget {
     return null;
   }
 
-
-  /// 🔥 Funcția de salvare a utilizatorului în Firestore
   Future<void> saveUserToFirestore(User user) async {
-    final userDocRef = FirebaseFirestore.instance.collection('users').doc(user.uid);
+    final userDocRef =
+        FirebaseFirestore.instance.collection('users').doc(user.uid);
     final userData = {
-      'name': user.displayName ?? 'User ${user.uid.substring(0, 6)}', // Numele implicit
+      'name': user.displayName ?? 'User ${user.uid.substring(0, 6)}',
       'email': user.email ?? 'No Email',
     };
 
-    // Adaugă sau actualizează utilizatorul în Firestore
-    await userDocRef.set(userData, SetOptions(merge: true)); // Folosim merge pentru a nu suprascrie datele existente
+    await userDocRef.set(userData, SetOptions(merge: true));
     print('✅ Utilizator salvat în Firestore: ${userData['name']}');
   }
 }

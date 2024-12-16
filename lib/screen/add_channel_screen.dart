@@ -13,13 +13,14 @@ class AddChannelScreen extends StatefulWidget {
   _AddChannelScreenState createState() => _AddChannelScreenState();
 }
 
-class _AddChannelScreenState extends State<AddChannelScreen> with SingleTickerProviderStateMixin {
+class _AddChannelScreenState extends State<AddChannelScreen>
+    with SingleTickerProviderStateMixin {
   late TabController _tabController;
 
   @override
   void initState() {
     super.initState();
-    _tabController = TabController(length: 2, vsync: this); // 2 tab-uri
+    _tabController = TabController(length: 2, vsync: this);
   }
 
   @override
@@ -69,14 +70,20 @@ class _CreateChannelTabState extends State<CreateChannelTab> {
   bool _isKeyVisible = false;
 
   String _generateRandomKey(int length) {
-    const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789!@#\$%^&*()';
+    const chars =
+        'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789!@#\$%^&*()';
     Random random = Random.secure();
-    return List.generate(length, (index) => chars[random.nextInt(chars.length)]).join();
+    return List.generate(length, (index) => chars[random.nextInt(chars.length)])
+        .join();
   }
 
-  Future<void> _saveChannelToFirestore(String channelName, String algorithm) async {
+  Future<void> _saveChannelToFirestore(
+      String channelName, String algorithm) async {
     try {
-      await FirebaseFirestore.instance.collection('channels').doc(channelName).set({
+      await FirebaseFirestore.instance
+          .collection('channels')
+          .doc(channelName)
+          .set({
         'name': channelName,
         'encryptionAlgorithm': algorithm,
         'createdAt': FieldValue.serverTimestamp(),
@@ -119,7 +126,8 @@ class _CreateChannelTabState extends State<CreateChannelTab> {
                 ),
               ),
               IconButton(
-                icon: Icon(_isKeyVisible ? Icons.visibility : Icons.visibility_off),
+                icon: Icon(
+                    _isKeyVisible ? Icons.visibility : Icons.visibility_off),
                 onPressed: () {
                   setState(() {
                     _isKeyVisible = !_isKeyVisible;
@@ -140,7 +148,8 @@ class _CreateChannelTabState extends State<CreateChannelTab> {
           const SizedBox(height: 20),
           ElevatedButton(
             onPressed: () async {
-              if (_nameController.text.isNotEmpty && _secretKeyController.text.isNotEmpty) {
+              if (_nameController.text.isNotEmpty &&
+                  _secretKeyController.text.isNotEmpty) {
                 final channelName = _nameController.text.trim();
                 final secretKey = _secretKeyController.text.trim();
 
@@ -190,7 +199,8 @@ class _JoinChannelTabState extends State<JoinChannelTab> {
         _isLoading = false;
       });
       ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(content: Text('Vă rugăm să completați toate câmpurile.')),
+        const SnackBar(
+            content: Text('Vă rugăm să completați toate câmpurile.')),
       );
       return;
     }
@@ -203,7 +213,8 @@ class _JoinChannelTabState extends State<JoinChannelTab> {
       Navigator.pop(context, Channel(name: channelName, secretKey: secretKey));
     } catch (e) {
       ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(content: Text('A apărut o eroare la conectarea la canal.')),
+        const SnackBar(
+            content: Text('A apărut o eroare la conectarea la canal.')),
       );
     } finally {
       setState(() {
