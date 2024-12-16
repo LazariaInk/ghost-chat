@@ -4,7 +4,9 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
+import '../utils/dialog_utils.dart';
 import 'main_screen.dart';
+
 
 class SignInScreen extends StatelessWidget {
   const SignInScreen({super.key});
@@ -18,7 +20,7 @@ class SignInScreen extends StatelessWidget {
       body: Center(
         child: ElevatedButton(
           onPressed: () async {
-            User? user = await signInWithGoogle();
+            User? user = await signInWithGoogle(context);
             if (user != null) {
               Navigator.pushReplacement(
                 context,
@@ -34,14 +36,14 @@ class SignInScreen extends StatelessWidget {
     );
   }
 
-  Future<User?> signInWithGoogle() async {
+  Future<User?> signInWithGoogle(BuildContext context) async {
     try {
       final GoogleSignIn googleSignIn = GoogleSignIn();
       final GoogleSignInAccount? googleUser = await googleSignIn.signIn();
 
       if (googleUser != null) {
         final GoogleSignInAuthentication googleAuth =
-            await googleUser.authentication;
+        await googleUser.authentication;
 
         final AuthCredential credential = GoogleAuthProvider.credential(
           accessToken: googleAuth.accessToken,
@@ -49,7 +51,7 @@ class SignInScreen extends StatelessWidget {
         );
 
         final UserCredential userCredential =
-            await FirebaseAuth.instance.signInWithCredential(credential);
+        await FirebaseAuth.instance.signInWithCredential(credential);
         final User? user = userCredential.user;
 
         if (user != null) {
@@ -60,14 +62,18 @@ class SignInScreen extends StatelessWidget {
         return user;
       }
     } catch (e) {
-      print('❌ Eroare la autentificare Google: $e');
+      DialogUtils.showErrorDialog(
+        context,
+        'Eroare la autentificare',
+        'Verificati conectiunea',
+      );
     }
     return null;
   }
 
   Future<void> saveUserToFirestore(User user) async {
     final userDocRef =
-        FirebaseFirestore.instance.collection('users').doc(user.uid);
+    FirebaseFirestore.instance.collection('users').doc(user.uid);
     final userData = {
       'name': user.displayName ?? 'User ${user.uid.substring(0, 6)}',
       'email': user.email ?? 'No Email',
