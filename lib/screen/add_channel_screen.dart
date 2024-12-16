@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import '../model/channel.dart';
+import '../utils/dialog_utils.dart';
 
 class AddChannelScreen extends StatefulWidget {
   const AddChannelScreen({super.key});
@@ -88,16 +89,18 @@ class _CreateChannelTabState extends State<CreateChannelTab> {
         'encryptionAlgorithm': algorithm,
         'createdAt': FieldValue.serverTimestamp(),
       });
-      print('✅ Canalul a fost salvat în Firestore.');
     } catch (e) {
-      print('❌ Eroare la salvarea canalului în Firestore: $e');
+      DialogUtils.showErrorDialog(
+        context,
+        'Eroare la adaugarea canalului',
+        'Verificati conectiunea',
+      );
     }
   }
 
   Future<void> _saveEncryptionKey(String channelName, String key) async {
     final prefs = await SharedPreferences.getInstance();
     await prefs.setString('${channelName}_key', key);
-    print('✅ Cheia de criptare a fost salvată local.');
   }
 
   @override
@@ -162,7 +165,11 @@ class _CreateChannelTabState extends State<CreateChannelTab> {
                 );
                 Navigator.pop(context, newChannel);
               } else {
-                print('❌ Numele canalului și cheia de criptare sunt necesare.');
+                DialogUtils.showErrorDialog(
+                  context,
+                  '❌Error❌',
+                  'Numele canalului și cheia de criptare sunt necesare.',
+                );
               }
             },
             child: const Text('Creează canal'),

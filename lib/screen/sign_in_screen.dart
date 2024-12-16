@@ -7,7 +7,6 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import '../utils/dialog_utils.dart';
 import 'main_screen.dart';
 
-
 class SignInScreen extends StatelessWidget {
   const SignInScreen({super.key});
 
@@ -43,7 +42,7 @@ class SignInScreen extends StatelessWidget {
 
       if (googleUser != null) {
         final GoogleSignInAuthentication googleAuth =
-        await googleUser.authentication;
+            await googleUser.authentication;
 
         final AuthCredential credential = GoogleAuthProvider.credential(
           accessToken: googleAuth.accessToken,
@@ -51,7 +50,7 @@ class SignInScreen extends StatelessWidget {
         );
 
         final UserCredential userCredential =
-        await FirebaseAuth.instance.signInWithCredential(credential);
+            await FirebaseAuth.instance.signInWithCredential(credential);
         final User? user = userCredential.user;
 
         if (user != null) {
@@ -73,7 +72,7 @@ class SignInScreen extends StatelessWidget {
 
   Future<void> saveUserToFirestore(User user) async {
     final userDocRef =
-    FirebaseFirestore.instance.collection('users').doc(user.uid);
+        FirebaseFirestore.instance.collection('users').doc(user.uid);
     final userData = {
       'name': user.displayName ?? 'User ${user.uid.substring(0, 6)}',
       'email': user.email ?? 'No Email',
