@@ -165,10 +165,9 @@ class _CreateChannelTabState extends State<CreateChannelTab> {
                 );
                 Navigator.pop(context, newChannel);
               } else {
-                DialogUtils.showErrorDialog(
-                  context,
-                  '❌Error❌',
-                  'Numele canalului și cheia de criptare sunt necesare.',
+                ScaffoldMessenger.of(context).showSnackBar(
+                  const SnackBar(
+                      content: Text('❌Numele canalului și cheia de criptare sunt necesare.❌')),
                 );
               }
             },
@@ -207,7 +206,7 @@ class _JoinChannelTabState extends State<JoinChannelTab> {
       });
       ScaffoldMessenger.of(context).showSnackBar(
         const SnackBar(
-            content: Text('Vă rugăm să completați toate câmpurile.')),
+            content: Text('❌Vă rugăm să completați toate câmpurile.❌')),
       );
       return;
     }
