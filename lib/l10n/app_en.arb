@@ -1,4 +1,5 @@
 {
+  "@@locale": "en",
   "appTitle": "Ghost chat",
   "settings": "Settings",
   "notifications": "Notifications",

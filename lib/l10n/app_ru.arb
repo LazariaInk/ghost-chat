@@ -1,4 +1,5 @@
 {
+  "@@locale": "ru",
   "appTitle": "Ghost chat",
   "settings": "Настройки",
   "notifications": "Оповещение",
