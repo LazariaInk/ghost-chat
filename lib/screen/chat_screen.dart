@@ -15,6 +15,7 @@ class ChatScreen extends StatefulWidget {
 
 class _ChatScreenState extends State<ChatScreen> {
   final TextEditingController _messageController = TextEditingController();
+  final ScrollController _scrollController = ScrollController();
   String? _encryptionKey;
 
   @override
@@ -41,7 +42,7 @@ class _ChatScreenState extends State<ChatScreen> {
     if (_messageController.text.isNotEmpty && _encryptionKey != null) {
       String plainMessage = _messageController.text;
       String encryptedMessage =
-          CryptoUtils.encryptMessage(plainMessage, _encryptionKey!);
+      CryptoUtils.encryptMessage(plainMessage, _encryptionKey!);
 
       final userId = FirebaseAuth.instance.currentUser?.uid;
       final userDoc = await FirebaseFirestore.instance
@@ -70,6 +71,17 @@ class _ChatScreenState extends State<ChatScreen> {
 
       _messageController.clear();
       print('✅ Mesaj trimis de $userName');
+      _scrollToBottom();
+    }
+  }
+
+  void _scrollToBottom() {
+    if (_scrollController.hasClients) {
+      _scrollController.animateTo(
+        _scrollController.position.maxScrollExtent,
+        duration: const Duration(milliseconds: 300),
+        curve: Curves.easeOut,
+      );
     }
   }
 
@@ -111,7 +123,10 @@ class _ChatScreenState extends State<ChatScreen> {
                   );
                 }).toList();
 
+                WidgetsBinding.instance.addPostFrameCallback((_) => _scrollToBottom());
+
                 return ListView(
+                  controller: _scrollController,
                   children: messages,
                 );
               },
