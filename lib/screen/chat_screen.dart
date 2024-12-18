@@ -8,7 +8,6 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:image_picker/image_picker.dart';
 import "package:image/image.dart" as img;
 import 'dart:convert';
-import 'dart:typed_data';
 import '../utils/crypto_utils.dart';
 
 class ChatScreen extends StatefulWidget {
@@ -162,24 +161,32 @@ class _ChatScreenState extends State<ChatScreen> {
                         children: [
                           Text(
                             doc['senderName'] ?? 'Unknown User',
-                            style: TextStyle(fontSize: 12, color: Colors.grey),
+                            style: const TextStyle(
+                                fontSize: 12, color: Colors.grey),
                           ),
-                          SizedBox(height: 4),
+                          const SizedBox(height: 4),
                           GestureDetector(
-                            onTap: decryptedMessage.startsWith('image:') ? () => Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                builder: (_) => FullScreenImage(
-                                    imageData: base64Decode(
-                                        decryptedMessage.substring(6))),
-                              ),
-                            ) : () => Clipboard.setData(ClipboardData(text: decryptedMessage)),
+                            onTap: decryptedMessage.startsWith('image:')
+                                ? () => Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                        builder: (_) => FullScreenImage(
+                                            imageData: base64Decode(
+                                                decryptedMessage.substring(6))),
+                                      ),
+                                    )
+                                : () => Clipboard.setData(
+                                    ClipboardData(text: decryptedMessage)),
                             child: Container(
                               padding: const EdgeInsets.all(1.0),
                               decoration: BoxDecoration(
                                 color: isMyMessage
-                                    ? Theme.of(context).appBarTheme.backgroundColor
-                                    : Theme.of(context).appBarTheme.backgroundColor,
+                                    ? Theme.of(context)
+                                        .appBarTheme
+                                        .backgroundColor
+                                    : Theme.of(context)
+                                        .appBarTheme
+                                        .backgroundColor,
                                 borderRadius: BorderRadius.circular(10),
                               ),
                               child: decryptedMessage.startsWith('image:')
@@ -244,7 +251,7 @@ class _ChatScreenState extends State<ChatScreen> {
 class FullScreenImage extends StatelessWidget {
   final Uint8List imageData;
 
-  const FullScreenImage({Key? key, required this.imageData}) : super(key: key);
+  const FullScreenImage({super.key, required this.imageData});
 
   @override
   Widget build(BuildContext context) {
