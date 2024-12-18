@@ -2,6 +2,7 @@ import 'dart:io';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:image_picker/image_picker.dart';
@@ -165,14 +166,14 @@ class _ChatScreenState extends State<ChatScreen> {
                           ),
                           SizedBox(height: 4),
                           GestureDetector(
-                            onTap: () => Navigator.push(
+                            onTap: decryptedMessage.startsWith('image:') ? () => Navigator.push(
                               context,
                               MaterialPageRoute(
                                 builder: (_) => FullScreenImage(
                                     imageData: base64Decode(
                                         decryptedMessage.substring(6))),
                               ),
-                            ),
+                            ) : () => Clipboard.setData(ClipboardData(text: decryptedMessage)),
                             child: Container(
                               padding: const EdgeInsets.all(1.0),
                               decoration: BoxDecoration(
