@@ -4,7 +4,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:image_picker/image_picker.dart';
-import 'package:image/image.dart' as img;
+import "package:image/image.dart" as img;
 import 'dart:convert';
 import 'dart:typed_data';
 import '../utils/crypto_utils.dart';
@@ -44,7 +44,8 @@ class _ChatScreenState extends State<ChatScreen> {
     final resizedImage = img.copyResize(decodedImage!, width: 420);
     final compressedImageBytes = img.encodeJpg(resizedImage, quality: 40);
     final tempDir = Directory.systemTemp;
-    final compressedImagePath = '${tempDir.path}/compressed_${DateTime.now().millisecondsSinceEpoch}.jpg';
+    final compressedImagePath =
+        '${tempDir.path}/compressed_${DateTime.now().millisecondsSinceEpoch}.jpg';
     final compressedImageFile = File(compressedImagePath);
     await compressedImageFile.writeAsBytes(compressedImageBytes);
     return compressedImagePath;
@@ -56,7 +57,8 @@ class _ChatScreenState extends State<ChatScreen> {
   }
 
   void _sendMessage({String? imagePath}) async {
-    if ((_messageController.text.isNotEmpty || imagePath != null) && _encryptionKey != null) {
+    if ((_messageController.text.isNotEmpty || imagePath != null) &&
+        _encryptionKey != null) {
       setState(() {});
 
       try {
@@ -66,13 +68,21 @@ class _ChatScreenState extends State<ChatScreen> {
           final base64Image = await _convertImageToBase64(compressedImagePath);
           plainMessage = 'image:$base64Image';
         }
-        String encryptedMessage = CryptoUtils.encryptMessage(plainMessage, _encryptionKey!);
+        String encryptedMessage =
+            CryptoUtils.encryptMessage(plainMessage, _encryptionKey!);
 
         final userId = FirebaseAuth.instance.currentUser?.uid;
-        final userDoc = await FirebaseFirestore.instance.collection('users').doc(userId).get();
+        final userDoc = await FirebaseFirestore.instance
+            .collection('users')
+            .doc(userId)
+            .get();
         final userName = userDoc['name'] ?? 'Anonymous User';
 
-        await FirebaseFirestore.instance.collection('channels').doc(widget.channelName).collection('messages').add({
+        await FirebaseFirestore.instance
+            .collection('channels')
+            .doc(widget.channelName)
+            .collection('messages')
+            .add({
           'content': encryptedMessage,
           'senderId': userId,
           'senderName': userName,
@@ -82,7 +92,9 @@ class _ChatScreenState extends State<ChatScreen> {
         _messageController.clear();
         _scrollToBottom();
       } catch (e) {
-        print('Error sending message: $e');
+        ScaffoldMessenger.of(context).showSnackBar(
+          const SnackBar(content: Text('Error on send message')),
+        );
       } finally {
         setState(() {});
       }
@@ -125,16 +137,24 @@ class _ChatScreenState extends State<ChatScreen> {
                   final userId = FirebaseAuth.instance.currentUser?.uid;
                   final isMyMessage = doc['senderId'] == userId;
                   try {
-                    decryptedMessage = CryptoUtils.decryptMessage(encryptedMessage, _encryptionKey!);
+                    decryptedMessage = CryptoUtils.decryptMessage(
+                        encryptedMessage, _encryptionKey!);
                   } catch (e) {
-                    print('Error decrypting message: $e');
+                    ScaffoldMessenger.of(context).showSnackBar(
+                      const SnackBar(
+                          content: Text('Error decrypting message:')),
+                    );
                   }
                   return Padding(
                     padding: const EdgeInsets.symmetric(vertical: 8.0),
                     child: Align(
-                      alignment: isMyMessage ? Alignment.centerRight : Alignment.centerLeft,
+                      alignment: isMyMessage
+                          ? Alignment.centerRight
+                          : Alignment.centerLeft,
                       child: Column(
-                        crossAxisAlignment: isMyMessage ? CrossAxisAlignment.end : CrossAxisAlignment.start,
+                        crossAxisAlignment: isMyMessage
+                            ? CrossAxisAlignment.end
+                            : CrossAxisAlignment.start,
                         children: [
                           Text(
                             doc['senderName'] ?? 'Unknown User',
@@ -146,23 +166,26 @@ class _ChatScreenState extends State<ChatScreen> {
                               context,
                               MaterialPageRoute(
                                 builder: (_) => FullScreenImage(
-                                    imageData: base64Decode(decryptedMessage.substring(6))
-                                ),
+                                    imageData: base64Decode(
+                                        decryptedMessage.substring(6))),
                               ),
                             ),
                             child: Container(
                               padding: const EdgeInsets.all(10.0),
                               decoration: BoxDecoration(
-                                color: isMyMessage ? Colors.blue : Colors.grey[200],
+                                color: isMyMessage
+                                    ? Colors.blue
+                                    : Colors.grey[200],
                                 borderRadius: BorderRadius.circular(10),
                               ),
                               child: decryptedMessage.startsWith('image:')
                                   ? Image.memory(
-                                base64Decode(decryptedMessage.substring(6)),
-                                width: 120,
-                                height: 120,
-                                fit: BoxFit.cover,
-                              )
+                                      base64Decode(
+                                          decryptedMessage.substring(6)),
+                                      width: 120,
+                                      height: 120,
+                                      fit: BoxFit.cover,
+                                    )
                                   : Text(decryptedMessage),
                             ),
                           ),
@@ -171,30 +194,41 @@ class _ChatScreenState extends State<ChatScreen> {
                     ),
                   );
                 }).toList();
-                WidgetsBinding.instance.addPostFrameCallback((_) => _scrollToBottom());
-                return ListView(controller: _scrollController, children: messages);
+                WidgetsBinding.instance
+                    .addPostFrameCallback((_) => _scrollToBottom());
+                return ListView(
+                    controller: _scrollController, children: messages);
               },
             ),
           ),
           Row(
             children: [
-              IconButton(icon: const Icon(Icons.camera_alt), onPressed: () async {
-                final picker = ImagePicker();
-                final photo = await picker.pickImage(source: ImageSource.camera);
-                if (photo != null) _sendMessage(imagePath: photo.path);
-              }),
-              IconButton(icon: const Icon(Icons.photo), onPressed: () async {
-                final picker = ImagePicker();
-                final image = await picker.pickImage(source: ImageSource.gallery);
-                if (image != null) _sendMessage(imagePath: image.path);
-              }),
+              IconButton(
+                  icon: const Icon(Icons.camera_alt),
+                  onPressed: () async {
+                    final picker = ImagePicker();
+                    final photo =
+                        await picker.pickImage(source: ImageSource.camera);
+                    if (photo != null) _sendMessage(imagePath: photo.path);
+                  }),
+              IconButton(
+                  icon: const Icon(Icons.photo),
+                  onPressed: () async {
+                    final picker = ImagePicker();
+                    final image =
+                        await picker.pickImage(source: ImageSource.gallery);
+                    if (image != null) _sendMessage(imagePath: image.path);
+                  }),
               Expanded(
                 child: TextField(
                   controller: _messageController,
-                  decoration: const InputDecoration(hintText: 'Write a message...'),
+                  decoration:
+                      const InputDecoration(hintText: 'Write a message...'),
                 ),
               ),
-              IconButton(icon: const Icon(Icons.send), onPressed: () => _sendMessage()),
+              IconButton(
+                  icon: const Icon(Icons.send),
+                  onPressed: () => _sendMessage()),
             ],
           ),
         ],
