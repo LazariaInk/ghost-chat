@@ -166,8 +166,8 @@ class _CreateChannelTabState extends State<CreateChannelTab> {
               } else {
                 ScaffoldMessenger.of(context).showSnackBar(
                   SnackBar(
-                      content: Text(
-                          AppLocalizations.of(context)!.addChannelAllFieldsReqMessage)),
+                      content: Text(AppLocalizations.of(context)!
+                          .addChannelAllFieldsReqMessage)),
                 );
               }
             },
@@ -205,7 +205,9 @@ class _JoinChannelTabState extends State<JoinChannelTab> {
         _isLoading = false;
       });
       ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(content: Text(AppLocalizations.of(context)!.connectingChannelAllFieldsReqMessage)),
+        SnackBar(
+            content: Text(AppLocalizations.of(context)!
+                .connectingChannelAllFieldsReqMessage)),
       );
       return;
     }
@@ -219,7 +221,8 @@ class _JoinChannelTabState extends State<JoinChannelTab> {
     } catch (e) {
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
-            content: Text(AppLocalizations.of(context)!.errorOnChannelConnection)),
+            content:
+                Text(AppLocalizations.of(context)!.errorOnChannelConnection)),
       );
     } finally {
       setState(() {
