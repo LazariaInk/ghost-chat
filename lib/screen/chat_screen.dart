@@ -122,38 +122,53 @@ class _ChatScreenState extends State<ChatScreen> {
                 final messages = snapshot.data!.docs.map((doc) {
                   final encryptedMessage = doc['content'];
                   String decryptedMessage = encryptedMessage;
+                  final userId = FirebaseAuth.instance.currentUser?.uid;
+                  final isMyMessage = doc['senderId'] == userId;
                   try {
                     decryptedMessage = CryptoUtils.decryptMessage(encryptedMessage, _encryptionKey!);
                   } catch (e) {
                     print('Error decrypting message: $e');
                   }
-                  return ListTile(
-                    title: decryptedMessage.startsWith('image:')
-                        ? GestureDetector(
-                      onTap: () => Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (_) => FullScreenImage(
-                                  imageData: base64Decode(decryptedMessage.substring(6))
+                  return Padding(
+                    padding: const EdgeInsets.symmetric(vertical: 8.0),
+                    child: Align(
+                      alignment: isMyMessage ? Alignment.centerRight : Alignment.centerLeft,
+                      child: Column(
+                        crossAxisAlignment: isMyMessage ? CrossAxisAlignment.end : CrossAxisAlignment.start,
+                        children: [
+                          Text(
+                            doc['senderName'] ?? 'Unknown User',
+                            style: TextStyle(fontSize: 12, color: Colors.grey),
+                          ),
+                          SizedBox(height: 4),
+                          GestureDetector(
+                            onTap: () => Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (_) => FullScreenImage(
+                                    imageData: base64Decode(decryptedMessage.substring(6))
+                                ),
+                              ),
+                            ),
+                            child: Container(
+                              padding: const EdgeInsets.all(10.0),
+                              decoration: BoxDecoration(
+                                color: isMyMessage ? Colors.blue : Colors.grey[200],
+                                borderRadius: BorderRadius.circular(10),
+                              ),
+                              child: decryptedMessage.startsWith('image:')
+                                  ? Image.memory(
+                                base64Decode(decryptedMessage.substring(6)),
+                                width: 120,
+                                height: 120,
+                                fit: BoxFit.cover,
                               )
-                          )
-                      ),
-                      child: ClipRRect(
-                        borderRadius: BorderRadius.circular(8.0),
-                        child: Container(
-                          width: 80,
-                          height: 80,
-                          child: AspectRatio(
-                            aspectRatio:  1,
-                            child: Image.memory(
-                              base64Decode(decryptedMessage.substring(6)),
+                                  : Text(decryptedMessage),
                             ),
                           ),
-                        ),
+                        ],
                       ),
-                    )
-                        : Text(decryptedMessage),
-                    subtitle: Text(doc['senderName'] ?? 'Unknown User'),
+                    ),
                   );
                 }).toList();
                 WidgetsBinding.instance.addPostFrameCallback((_) => _scrollToBottom());
