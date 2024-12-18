@@ -162,41 +162,37 @@ class _ChatScreenState extends State<ChatScreen> {
                           Text(
                             doc['senderName'] ?? 'Unknown User',
                             style: const TextStyle(
-                                fontSize: 12, color: Colors.grey),
+                                fontSize: 7, color: Colors.grey),
                           ),
                           const SizedBox(height: 4),
                           GestureDetector(
                             onTap: decryptedMessage.startsWith('image:')
                                 ? () => Navigator.push(
-                                      context,
-                                      MaterialPageRoute(
-                                        builder: (_) => FullScreenImage(
-                                            imageData: base64Decode(
-                                                decryptedMessage.substring(6))),
-                                      ),
-                                    )
-                                : () => Clipboard.setData(
-                                    ClipboardData(text: decryptedMessage)),
+                              context,
+                              MaterialPageRoute(
+                                builder: (_) => FullScreenImage(
+                                  imageData: base64Decode(decryptedMessage.substring(6)),
+                                ),
+                              ),
+                            )
+                                : () => Clipboard.setData(ClipboardData(text: decryptedMessage)),
                             child: Container(
-                              padding: const EdgeInsets.all(1.0),
+                              padding: decryptedMessage.startsWith('image:')
+                                  ? EdgeInsets.zero
+                                  : const EdgeInsets.all(8.0),
                               decoration: BoxDecoration(
                                 color: isMyMessage
-                                    ? Theme.of(context)
-                                        .appBarTheme
-                                        .backgroundColor
-                                    : Theme.of(context)
-                                        .appBarTheme
-                                        .backgroundColor,
+                                    ? Theme.of(context).appBarTheme.backgroundColor
+                                    : Theme.of(context).appBarTheme.backgroundColor,
                                 borderRadius: BorderRadius.circular(10),
                               ),
                               child: decryptedMessage.startsWith('image:')
                                   ? Image.memory(
-                                      base64Decode(
-                                          decryptedMessage.substring(6)),
-                                      width: 120,
-                                      height: 120,
-                                      fit: BoxFit.cover,
-                                    )
+                                base64Decode(decryptedMessage.substring(6)),
+                                width: 120,
+                                height: 120,
+                                fit: BoxFit.cover,
+                              )
                                   : Text(decryptedMessage),
                             ),
                           ),

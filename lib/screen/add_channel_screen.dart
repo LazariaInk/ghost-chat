@@ -168,7 +168,7 @@ class _CreateChannelTabState extends State<CreateChannelTab> {
                   SnackBar(
                       content: Text(AppLocalizations.of(context)!
                           .addChannelAllFieldsReqMessage),
-                    backgroundColor: Color(0xFFFF9999)));
+                    backgroundColor: const Color(0xFFFF9999)));
               }
             },
             child: Text(AppLocalizations.of(context)!.createChannelTab),
@@ -207,7 +207,7 @@ class _JoinChannelTabState extends State<JoinChannelTab> {
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
           content: Text(AppLocalizations.of(context)!.connectingChannelAllFieldsReqMessage),
-          backgroundColor: Color(0xFFFF9999),
+          backgroundColor: const Color(0xFFFF9999),
         ),
       );
       return;
@@ -223,7 +223,7 @@ class _JoinChannelTabState extends State<JoinChannelTab> {
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
           content: Text(AppLocalizations.of(context)!.errorOnChannelConnection),
-          backgroundColor: Color(0xFFFF9999),
+          backgroundColor: const Color(0xFFFF9999),
         ),
       );
     } finally {
