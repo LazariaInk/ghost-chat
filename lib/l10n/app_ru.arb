@@ -18,7 +18,16 @@
   "delete": "Удалить",
   "searchChannel": "Поиск канала...",
   "addChannel": "Добавить канал",
-  "channelName": "Имя канала",
+  "channelName": "Название канала",
   "secretKey": "Секретный ключ",
-  "encryptionAlgorithm": "Алгоритм шифрования"
+  "encryptionAlgorithm": "Алгоритм шифрования",
+  "createChannelTab" : "Создать канал",
+  "connectingToAChannelTab" : "Подключитесь к каналу",
+  "addChannelErrorMessage" : "Ошибка при добавление канала",
+  "checkConnectionMessage" : "Проверьте соединение",
+  "secretKeyLabel" : "Секретный ключ",
+  "addChannelAllFieldsReqMessage" : "Требуется имя канала и ключ шифрования.",
+  "connectingChannelAllFieldsReqMessage" : "Все поля являются обязательными.",
+  "errorOnChannelConnection" : "Произошла ошибка при подключении к каналу.",
+  "connectingButton" : "войти"
 }

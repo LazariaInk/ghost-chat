@@ -37,9 +37,9 @@ class _AddChannelScreenState extends State<AddChannelScreen>
         title: Text(AppLocalizations.of(context)!.addChannel),
         bottom: TabBar(
           controller: _tabController,
-          tabs: const [
-            Tab(text: 'Creează canal'),
-            Tab(text: 'Conectează-te la canal'),
+          tabs: [
+            Tab(text: AppLocalizations.of(context)!.createChannelTab),
+            Tab(text: AppLocalizations.of(context)!.connectingToAChannelTab),
           ],
         ),
       ),
@@ -65,8 +65,7 @@ class _CreateChannelTabState extends State<CreateChannelTab> {
   final TextEditingController _nameController = TextEditingController();
   final TextEditingController _secretKeyController = TextEditingController();
 
-  String _selectedAlgorithm = 'AES';
-  final List<String> _encryptionAlgorithms = ['AES', 'RSA', 'ChaCha20'];
+  final String _selectedAlgorithm = 'AES';
 
   bool _isKeyVisible = false;
 
@@ -92,8 +91,8 @@ class _CreateChannelTabState extends State<CreateChannelTab> {
     } catch (e) {
       DialogUtils.showErrorDialog(
         context,
-        'Eroare la adaugarea canalului',
-        'Verificati conectiunea',
+        AppLocalizations.of(context)!.addChannelErrorMessage,
+        AppLocalizations.of(context)!.checkConnectionMessage,
       );
     }
   }
@@ -113,7 +112,7 @@ class _CreateChannelTabState extends State<CreateChannelTab> {
           TextField(
             controller: _nameController,
             decoration: InputDecoration(
-              labelText: 'Numele canalului',
+              labelText: AppLocalizations.of(context)!.channelName,
             ),
           ),
           const SizedBox(height: 20),
@@ -124,7 +123,7 @@ class _CreateChannelTabState extends State<CreateChannelTab> {
                   controller: _secretKeyController,
                   obscureText: !_isKeyVisible,
                   decoration: InputDecoration(
-                    labelText: 'Cheia secretă',
+                    labelText: AppLocalizations.of(context)!.secretKey,
                   ),
                 ),
               ),
@@ -166,12 +165,13 @@ class _CreateChannelTabState extends State<CreateChannelTab> {
                 Navigator.pop(context, newChannel);
               } else {
                 ScaffoldMessenger.of(context).showSnackBar(
-                  const SnackBar(
-                      content: Text('❌Numele canalului și cheia de criptare sunt necesare.❌')),
+                  SnackBar(
+                      content: Text(
+                          AppLocalizations.of(context)!.addChannelAllFieldsReqMessage)),
                 );
               }
             },
-            child: const Text('Creează canal'),
+            child: Text(AppLocalizations.of(context)!.createChannelTab),
           ),
         ],
       ),
@@ -205,8 +205,7 @@ class _JoinChannelTabState extends State<JoinChannelTab> {
         _isLoading = false;
       });
       ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(
-            content: Text('❌Vă rugăm să completați toate câmpurile.❌')),
+        SnackBar(content: Text(AppLocalizations.of(context)!.connectingChannelAllFieldsReqMessage)),
       );
       return;
     }
@@ -219,8 +218,8 @@ class _JoinChannelTabState extends State<JoinChannelTab> {
       Navigator.pop(context, Channel(name: channelName, secretKey: secretKey));
     } catch (e) {
       ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(
-            content: Text('A apărut o eroare la conectarea la canal.')),
+        SnackBar(
+            content: Text(AppLocalizations.of(context)!.errorOnChannelConnection)),
       );
     } finally {
       setState(() {
@@ -237,16 +236,16 @@ class _JoinChannelTabState extends State<JoinChannelTab> {
         children: [
           TextField(
             controller: _nameController,
-            decoration: const InputDecoration(
-              labelText: 'Numele canalului',
+            decoration: InputDecoration(
+              labelText: AppLocalizations.of(context)!.channelName,
             ),
           ),
           const SizedBox(height: 20),
           TextField(
             controller: _secretKeyController,
             obscureText: true,
-            decoration: const InputDecoration(
-              labelText: 'Cheia secretă',
+            decoration: InputDecoration(
+              labelText: AppLocalizations.of(context)!.secretKey,
             ),
           ),
           const SizedBox(height: 20),
@@ -254,7 +253,7 @@ class _JoinChannelTabState extends State<JoinChannelTab> {
             onPressed: _isLoading ? null : _joinChannel,
             child: _isLoading
                 ? const CircularProgressIndicator(color: Colors.white)
-                : const Text('Conectează-te'),
+                : Text(AppLocalizations.of(context)!.connectingButton),
           ),
         ],
       ),

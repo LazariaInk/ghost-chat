@@ -20,5 +20,14 @@
   "addChannel": "Adaugă un canal",
   "channelName": "Numele canalului",
   "secretKey": "Cheia secretă",
-  "encryptionAlgorithm": "Algoritmul de criptare"
+  "encryptionAlgorithm": "Algoritmul de criptare",
+  "createChannelTab" : "creeaza un canal",
+  "connectingToAChannelTab" : "Conectează-te la canal",
+  "addChannelErrorMessage" : "Eroare la adaugarea canalului",
+  "checkConnectionMessage" : "Verificați conecțiunea",
+  "secretKeyLabel" : "Cheia secretă",
+  "addChannelAllFieldsReqMessage" : "Numele canalului și cheia de criptare sunt necesare.",
+  "connectingChannelAllFieldsReqMessage" : "Toate câmpurile sunt necesare.",
+  "errorOnChannelConnection" : "A apărut o eroare la conectarea la canal.",
+  "connectingButton" : "conectează-te"
 }
