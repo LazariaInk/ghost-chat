@@ -6,22 +6,19 @@
   "darkTheme": "Tema întunecată",
   "termsAndConditions": "Termeni și condiții",
   "selectLanguage": "Selectează Limba",
-
-  "signIn" : "Сonectare",
-
-  "channels" : "Canale",
-
-  "writeAMessage" : "Scrie un mesaj...",
-
-  "confirmDeletion" : "Confirmare ștergere",
-  "confirmDeletionMessage" : "Pentru a șterge canalul, scrieți \"DELETE\" în câmpul de mai jos:",
-  "confirmDeletionToolkit" :  "scrieți \"DELETE\"",
-  "cancel" : "anulează",
-  "delete" : "Șterge",
-  "searchChannel" : "Caută un canal...",
-
-  "addChannel" : "Adaugă un canal",
-  "channelName" : "Numele canalului",
-  "secretKey" : "Cheia secretă",
-  "encryptionAlgorithm" : "Algoritmul de criptare"
+  "signIn": "Сonectare",
+  "channels": "Canale",
+  "writeAMessage": "Scrie un mesaj...",
+  "errorDecryptingMessage": "Eroare la decriptare ",
+  "errorSendMessage" : "Eroare la trimiterea mesajului",
+  "confirmDeletion": "Confirmare ștergere",
+  "confirmDeletionMessage": "Pentru a șterge canalul, scrieți \"DELETE\" în câmpul de mai jos:",
+  "confirmDeletionToolkit": "scrieți \"DELETE\"",
+  "cancel": "anulează",
+  "delete": "Șterge",
+  "searchChannel": "Caută un canal...",
+  "addChannel": "Adaugă un canal",
+  "channelName": "Numele canalului",
+  "secretKey": "Cheia secretă",
+  "encryptionAlgorithm": "Algoritmul de criptare"
 }

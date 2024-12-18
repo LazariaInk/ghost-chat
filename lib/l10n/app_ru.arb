@@ -6,22 +6,19 @@
   "darkTheme": "Темная тема",
   "termsAndConditions": "Условия и положения",
   "selectLanguage": "Выберите язык",
-
-  "signIn" : "Bойти",
-
-  "channels" : "Каналы",
-
-  "writeAMessage" : "Напишите сообщение...",
-
-  "confirmDeletion" : "Подтвердить удаление",
-  "confirmDeletionMessage" : "Чтобы, удалить канал, напишите \"УДАЛИТЬ\" в поле ниже:",
-  "confirmDeletionToolkit" :  "напишите \"DELETE\"",
-  "cancel" : "отмена",
-  "delete" : "Удалить",
-  "searchChannel" : "Поиск канала...",
-
-  "addChannel" : "Добавить канал",
-  "channelName" : "Имя канала",
-  "secretKey" : "Секретный ключ",
-  "encryptionAlgorithm" : "Алгоритм шифрования"
+  "signIn": "Bойти",
+  "channels": "Каналы",
+  "writeAMessage": "Напишите сообщение...",
+  "errorDecryptingMessage": "Сообщение об ошибке расшифровки: ",
+  "errorSendMessage" : "Ошибка при отправке сообшении",
+  "confirmDeletion": "Подтвердить удаление",
+  "confirmDeletionMessage": "Чтобы, удалить канал, напишите \"УДАЛИТЬ\" в поле ниже:",
+  "confirmDeletionToolkit": "напишите \"DELETE\"",
+  "cancel": "отмена",
+  "delete": "Удалить",
+  "searchChannel": "Поиск канала...",
+  "addChannel": "Добавить канал",
+  "channelName": "Имя канала",
+  "secretKey": "Секретный ключ",
+  "encryptionAlgorithm": "Алгоритм шифрования"
 }

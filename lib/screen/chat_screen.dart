@@ -3,6 +3,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:image_picker/image_picker.dart';
 import "package:image/image.dart" as img;
 import 'dart:convert';
@@ -93,7 +94,8 @@ class _ChatScreenState extends State<ChatScreen> {
         _scrollToBottom();
       } catch (e) {
         ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(content: Text('Error on send message')),
+          SnackBar(
+              content: Text(AppLocalizations.of(context)!.errorSendMessage)),
         );
       } finally {
         setState(() {});
@@ -141,8 +143,9 @@ class _ChatScreenState extends State<ChatScreen> {
                         encryptedMessage, _encryptionKey!);
                   } catch (e) {
                     ScaffoldMessenger.of(context).showSnackBar(
-                      const SnackBar(
-                          content: Text('Error decrypting message:')),
+                      SnackBar(
+                          content: Text(AppLocalizations.of(context)!
+                              .errorDecryptingMessage)),
                     );
                   }
                   return Padding(
@@ -222,8 +225,8 @@ class _ChatScreenState extends State<ChatScreen> {
               Expanded(
                 child: TextField(
                   controller: _messageController,
-                  decoration:
-                      const InputDecoration(hintText: 'Write a message...'),
+                  decoration: InputDecoration(
+                      hintText: AppLocalizations.of(context)!.writeAMessage),
                 ),
               ),
               IconButton(
