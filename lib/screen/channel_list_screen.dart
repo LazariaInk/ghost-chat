@@ -183,7 +183,7 @@ class _ChannelListScreenState extends State<ChannelListScreen> {
             _addChannel(result);
           }
         },
-        backgroundColor: Colors.cyan,
+        backgroundColor: Theme.of(context).appBarTheme.backgroundColor,
         foregroundColor: Colors.white,
         child: const Icon(Icons.add),
       ),

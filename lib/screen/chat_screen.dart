@@ -174,11 +174,11 @@ class _ChatScreenState extends State<ChatScreen> {
                               ),
                             ),
                             child: Container(
-                              padding: const EdgeInsets.all(10.0),
+                              padding: const EdgeInsets.all(1.0),
                               decoration: BoxDecoration(
                                 color: isMyMessage
-                                    ? Colors.blue
-                                    : Colors.grey[200],
+                                    ? Theme.of(context).appBarTheme.backgroundColor
+                                    : Theme.of(context).appBarTheme.backgroundColor,
                                 borderRadius: BorderRadius.circular(10),
                               ),
                               child: decryptedMessage.startsWith('image:')
