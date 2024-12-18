@@ -29,5 +29,6 @@
   "addChannelAllFieldsReqMessage" : "Channel name and encryption key are required.",
   "connectingChannelAllFieldsReqMessage" : "All fields are required.",
   "errorOnChannelConnection" : "An error occurred connecting to the channel.",
-  "connectingButton" : "Sign in"
+  "connectingButton" : "Sign in",
+  "connectionSuccess" : "Connection success"
 }

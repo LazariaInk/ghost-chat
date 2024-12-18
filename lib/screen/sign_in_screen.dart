@@ -54,17 +54,20 @@ class SignInScreen extends StatelessWidget {
         final User? user = userCredential.user;
 
         if (user != null) {
-          print('✅ Autentificare reușită pentru UID: ${user.uid}');
+          ScaffoldMessenger.of(context).showSnackBar(
+            SnackBar(
+                content: Text(AppLocalizations.of(context)!.connectionSuccess)),
+          );
           await saveUserToFirestore(user);
         }
 
         return user;
       }
     } catch (e) {
-      DialogUtils.showErrorDialog(
-        context,
-        'Eroare la autentificare',
-        'Verificati conectiunea',
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+            content:
+                Text(AppLocalizations.of(context)!.checkConnectionMessage)),
       );
     }
     return null;

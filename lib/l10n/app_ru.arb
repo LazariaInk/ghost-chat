@@ -29,5 +29,6 @@
   "addChannelAllFieldsReqMessage" : "Требуется имя канала и ключ шифрования.",
   "connectingChannelAllFieldsReqMessage" : "Все поля являются обязательными.",
   "errorOnChannelConnection" : "Произошла ошибка при подключении к каналу.",
-  "connectingButton" : "войти"
+  "connectingButton" : "войти",
+  "connectionSuccess" : "Успешное соединение"
 }

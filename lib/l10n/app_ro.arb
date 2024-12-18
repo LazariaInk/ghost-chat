@@ -29,5 +29,6 @@
   "addChannelAllFieldsReqMessage" : "Numele canalului și cheia de criptare sunt necesare.",
   "connectingChannelAllFieldsReqMessage" : "Toate câmpurile sunt necesare.",
   "errorOnChannelConnection" : "A apărut o eroare la conectarea la canal.",
-  "connectingButton" : "conectează-te"
+  "connectingButton" : "conectează-te",
+  "connectionSuccess" : "Conecțiune reușită"
 }
