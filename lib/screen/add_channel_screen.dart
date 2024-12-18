@@ -167,8 +167,8 @@ class _CreateChannelTabState extends State<CreateChannelTab> {
                 ScaffoldMessenger.of(context).showSnackBar(
                   SnackBar(
                       content: Text(AppLocalizations.of(context)!
-                          .addChannelAllFieldsReqMessage)),
-                );
+                          .addChannelAllFieldsReqMessage),
+                    backgroundColor: Color(0xFFFF9999)));
               }
             },
             child: Text(AppLocalizations.of(context)!.createChannelTab),
@@ -206,8 +206,9 @@ class _JoinChannelTabState extends State<JoinChannelTab> {
       });
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
-            content: Text(AppLocalizations.of(context)!
-                .connectingChannelAllFieldsReqMessage)),
+          content: Text(AppLocalizations.of(context)!.connectingChannelAllFieldsReqMessage),
+          backgroundColor: Color(0xFFFF9999),
+        ),
       );
       return;
     }
@@ -221,8 +222,9 @@ class _JoinChannelTabState extends State<JoinChannelTab> {
     } catch (e) {
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
-            content:
-                Text(AppLocalizations.of(context)!.errorOnChannelConnection)),
+          content: Text(AppLocalizations.of(context)!.errorOnChannelConnection),
+          backgroundColor: Color(0xFFFF9999),
+        ),
       );
     } finally {
       setState(() {
