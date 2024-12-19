@@ -38,6 +38,39 @@ class _ChatScreenState extends State<ChatScreen> {
     });
   }
 
+  Future<void> _editEncryptionKey() async {
+    final TextEditingController keyController = TextEditingController(text: _encryptionKey);
+    await showDialog(
+      context: context,
+      builder: (context) {
+        return AlertDialog(
+          title: Text(AppLocalizations.of(context)?.editSecretKey ?? 'Edit Encryption Key'),
+          content: TextField(
+            controller: keyController,
+            decoration: InputDecoration(hintText: 'Enter new encryption key'),
+          ),
+          actions: [
+            TextButton(
+              onPressed: () => Navigator.of(context).pop(),
+              child: Text(AppLocalizations.of(context)?.cancel ?? 'Cancel'),
+            ),
+            TextButton(
+              onPressed: () async {
+                final prefs = await SharedPreferences.getInstance();
+                await prefs.setString('${widget.channelName}_key', keyController.text);
+                setState(() {
+                  _encryptionKey = keyController.text;
+                });
+                Navigator.of(context).pop();
+              },
+              child: Text(AppLocalizations.of(context)?.save ?? 'Save'),
+            ),
+          ],
+        );
+      },
+    );
+  }
+
   Future<String> _compressImage(String imagePath) async {
     final originalImage = File(imagePath);
     final imageBytes = await originalImage.readAsBytes();
@@ -120,6 +153,12 @@ class _ChatScreenState extends State<ChatScreen> {
     return Scaffold(
       appBar: AppBar(
         title: Text(widget.channelName),
+          actions: [
+            IconButton(
+              icon: const Icon(Icons.key),
+              onPressed: _editEncryptionKey,
+            ),
+          ]
       ),
       body: Column(
         children: [

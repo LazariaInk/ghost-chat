@@ -30,5 +30,7 @@
   "connectingChannelAllFieldsReqMessage" : "All fields are required.",
   "errorOnChannelConnection" : "An error occurred connecting to the channel.",
   "connectingButton" : "Sign in",
-  "connectionSuccess" : "Connection success"
+  "connectionSuccess" : "Connection success",
+  "save": "Save",
+  "editSecretKey" : "Edit secret key"
 }

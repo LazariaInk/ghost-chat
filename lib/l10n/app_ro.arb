@@ -30,5 +30,7 @@
   "connectingChannelAllFieldsReqMessage" : "Toate câmpurile sunt necesare.",
   "errorOnChannelConnection" : "A apărut o eroare la conectarea la canal.",
   "connectingButton" : "conectează-te",
-  "connectionSuccess" : "Conecțiune reușită"
+  "connectionSuccess" : "Conecțiune reușită",
+  "save": "Salvează",
+  "editSecretKey" : "Schimbă cheia secretă"
 }

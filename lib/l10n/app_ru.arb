@@ -30,5 +30,7 @@
   "connectingChannelAllFieldsReqMessage" : "Все поля являются обязательными.",
   "errorOnChannelConnection" : "Произошла ошибка при подключении к каналу.",
   "connectingButton" : "войти",
-  "connectionSuccess" : "Успешное соединение"
+  "connectionSuccess" : "Успешное соединение",
+  "save": "Сохранить",
+  "editSecretKey" : "Изменить секретный ключ"
 }
