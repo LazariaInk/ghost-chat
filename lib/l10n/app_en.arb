@@ -32,5 +32,7 @@
   "connectingButton" : "Sign in",
   "connectionSuccess" : "Connection success",
   "save": "Save",
-  "editSecretKey" : "Edit secret key"
+  "editSecretKey" : "Edit secret key",
+  "call" : "Call in progress",
+  "endCall" : "End call"
 }

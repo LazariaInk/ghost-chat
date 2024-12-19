@@ -32,5 +32,7 @@
   "connectingButton" : "войти",
   "connectionSuccess" : "Успешное соединение",
   "save": "Сохранить",
-  "editSecretKey" : "Изменить секретный ключ"
+  "editSecretKey" : "Изменить секретный ключ",
+  "call" : "Звонок в процессе",
+  "endCall" : "Завершить вызов"
 }
